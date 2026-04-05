@@ -1,31 +1,31 @@
 {
-	"name": "stub",
+	"name": "helloworld",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "workspace",
-	"workspaceFolder": "/workspace",
+	"workspaceFolder": "/workspaces",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+	"features": {
+		// "ghcr.io/stu-bell/devcontainer-features/claude-code:0": {}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "uname -a",
+	"postCreateCommand": {
+		"asdfInstall": "cut -d' ' -f1 .tool-versions|xargs -i asdf plugin add {} && asdf install"
+	},
 
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"tommasov.hosts",
-				"ms-azuretools.vscode-containers",
 				"mhutchie.git-graph",
 				"codezombiech.gitignore",
-				"VisualStudioExptTeam.vscodeintellicode",
-				"VisualStudioExptTeam.intellicode-api-usage-examples",
-				"DavidAnson.vscode-markdownlint",
-				"mechatroner.rainbow-csv",
-				"eamodio.gitlens@11.7.0"
+				"eamodio.gitlens@11.7.0",
+				"ms-azuretools.vscode-containers",
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	}

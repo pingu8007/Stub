@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "tommasov.hosts",
+    "mechatroner.rainbow-csv",
+    "DavidAnson.vscode-markdownlint",
+    "docker.docker",
+    "mutantdino.resourcemonitor"
+  ]
+}

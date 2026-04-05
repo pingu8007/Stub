@@ -1,52 +1,15 @@
-version: '3.9'
-# networks:
-#   default:
-#     name: dev-infra
-#     # docker network create dev-infra
-#     external: true
-
 volumes:
-  maven-repo:
-  npm-repo:
-  vscode-server-extensions:
-  vscode-server-insiders-extensions:
+  asdf-data:
+
 services:
   workspace:
-    image: registry.gitlab.com/pingu8007/devcontainer:latest
-    # networks:
-    #   default:
-    #     aliases:
-    #       - backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: user
     command: sleep infinity
     restart: unless-stopped
     volumes:
-      - ..:/workspace # Problematic on Windows, clone into WSL first
-      - maven-repo:/appdata/.m2
-      - npm-repo:/appdata/.npm
-      - vscode-server-extensions:/appdata/.vscode-server/extensions
-      - vscode-server-insiders-extensions:/appdata/.vscode-server-insiders/extensions
-
-  redis:
-    platform: linux/amd64
-    image: redis:alpine
-    # networks:
-    #   default:
-    #     aliases:
-    #       - redis.local
-    # ports:
-    #   - 6379:6379
-    restart: unless-stopped
-
-  plantuml:
-    image: plantuml/plantuml-server:jetty
-    # ports:
-    #   - 9999:8080
-    restart: unless-stopped
-    environment:
-      - BASE_URL
-      - PLANTUML_LIMIT_SIZE
-      - PLANTUML_STATS
-      - HTTP_AUTHORIZATION
-      - ALLOW_PLANTUML_INCLUDE
-
-# visit https://gitlab.com/pingu8007/devcontainer for more example
+      - ..:/workspaces
+      - /var/run/docker.sock:/var/run/docker.sock
+      - asdf-data:/userdata/asdf
